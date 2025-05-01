@@ -14,13 +14,14 @@
 
   <h3>合計金額: <span id="total">0</span>円</h3>
   <h4>税込価格: <span id="tax-included">0</span>円</h4>
-  
-<div>
-  <label><input type="radio" name="tax-rate" value="0.05"> 5%</label>
-  <label><input type="radio" name="tax-rate" value="0.08" checked> 8%</label>
-  <label><input type="radio" name="tax-rate" value="0.10"> 10%</label>
-</div>
-  
+
+  <!-- 税率の選択 -->
+  <div>
+    <label><input type="radio" name="tax-rate" value="0.05"> 5%</label>
+    <label><input type="radio" name="tax-rate" value="0.08" checked> 8%</label>
+    <label><input type="radio" name="tax-rate" value="0.10"> 10%</label>
+  </div>
+
   <button onclick="reset()">リセット</button>
 
   <!-- 注文リスト -->
