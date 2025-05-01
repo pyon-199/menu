@@ -14,24 +14,36 @@ for (let i = 0; i < items.length; i++) {
   button.textContent = `${items[i].name}（${items[i].price}円）`;
 
   button.onclick = function () {
-    // 金額を加算
     total += items[i].price;
     document.getElementById('total').textContent = total;
 
-    // 商品名を注文リストに追加
     const listItem = document.createElement('li');
     listItem.textContent = items[i].name;
     document.getElementById('orderList').appendChild(listItem);
+
+    updateTaxIncluded(); // 税込み表示も更新！
   };
 
   document.getElementById('menu').appendChild(button);
 }
 
-// リセット関数（HTML側でonclick="reset()"される）
+// 税込み価格の計算・表示
+function updateTaxIncluded() {
+  const taxRate = parseFloat(document.querySelector('input[name="tax-rate"]:checked').value);
+  const taxIncluded = Math.floor(total * (1 + taxRate));
+  document.getElementById('tax-included').textContent = taxIncluded;
+}
+
+// リセット処理
 function reset() {
   total = 0;
   document.getElementById('total').textContent = total;
-
-  // 注文リストも空にする
   document.getElementById('orderList').innerHTML = '';
+  updateTaxIncluded(); // 税込みもリセット
 }
+
+// 税率が変わったときに再計算
+const taxRadios = document.querySelectorAll('input[name="tax-rate"]');
+taxRadios.forEach(radio => {
+  radio.addEventListener('change', updateTaxIncluded);
+});
